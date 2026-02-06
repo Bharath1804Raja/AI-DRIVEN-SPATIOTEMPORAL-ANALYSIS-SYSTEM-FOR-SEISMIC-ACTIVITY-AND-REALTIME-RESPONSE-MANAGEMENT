@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-Driven Seismic Analysis & Real-Time Response - Monitor earthquakes worldwide">
+    <meta name="theme-color" content="#06b6d4">
+    <title>SeismoAI - Earthquake Monitoring & Safety</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Navigation Section -->
+    <nav class="hero-nav">
+        <div class="nav-container">
+            <div class="nav-badge">● Live Monitoring Active</div>
+            <h1 class="nav-title">
+                AI-Driven Seismic Analysis
+                <span class="highlight">&amp; Real-Time Response</span>
+            </h1>
+            <p class="nav-description">
+                Advanced spatiotemporal analysis of global seismic activity. Monitor earthquakes in real-time, understand risk levels, and stay prepared with AI-powered insights.
+            </p>
+            <div class="nav-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('dashboard')">View Live Map</button>
+                <button class="btn btn-secondary">Learn More</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🌍</div>
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Global Coverage</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-value">&lt;2 min</div>
+                    <div class="stat-label">Avg Detection</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value">~15-16</div>
+                    <div class="stat-label">M7+ Annually</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📡</div>
+                    <div class="stat-value">2,000+</div>
+                    <div class="stat-label">Active Stations</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <main class="main-content" id="dashboard">
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="realtime">Real-Time Data</button>
+            <button class="tab-btn" data-tab="analytics">Analytics</button>
+            <button class="tab-btn" data-tab="risk">Risk Assessment</button>
+            <button class="tab-btn" data-tab="forecast">Forecast</button>
+        </div>
+
+        <!-- Real-Time Data Tab -->
+        <section class="tab-content active" id="realtime-tab">
+            <div class="section-header">
+                <h2>Recent Activity - Last 24 Hours</h2>
+                <p id="earthquake-count">Loading earthquake data...</p>
+            </div>
+
+            <!-- Tab Switcher for 20 vs All -->
+            <div class="data-tabs">
+                <button class="data-tab-btn active" onclick="switchDataView('latest')">Latest 20</button>
+                <button class="data-tab-btn" onclick="switchDataView('all')">All 24 Hours</button>
+            </div>
+
+            <!-- Earthquake Table -->
+            <div class="table-container">
+                <table class="earthquake-table">
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Magnitude</th>
+                            <th>Date & Time</th>
+                            <th>Depth (km)</th>
+                            <th>Coordinates</th>
+                        </tr>
+                    </thead>
+                    <tbody id="earthquake-list">
+                        <tr>
+                            <td colspan="5" class="loading">Loading earthquake data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Analytics Tab -->
+        <section class="tab-content" id="analytics-tab">
+            <div class="section-header">
+                <h2>24-Hour Timeline Analytics</h2>
+                <p>Real-time earthquake distribution and magnitude analysis</p>
+            </div>
+
+            <div class="timeline-container">
+                <div id="timeline-events">
+                    <div class="loading">Loading timeline data...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Assessment Tab -->
+        <section class="tab-content" id="risk-tab">
+            <div class="section-header">
+                <h2>Global Risk Index & Regional Distribution</h2>
+                <p>Real-time seismic risk levels by region</p>
+            </div>
+
+            <!-- Global Risk Gauge -->
+            <div class="risk-gauge-container">
+                <div class="risk-gauge">
+                    <div class="gauge-value" id="global-risk">0</div>
+                    <div class="gauge-label">Global Risk Index</div>
+                </div>
+            </div>
+
+            <!-- Regional Risk Distribution -->
+            <div class="regions-grid">
+                <div id="regions-list"></div>
+            </div>
+        </section>
+
+        <!-- Forecast Tab -->
+        <section class="tab-content" id="forecast-tab">
+            <div class="section-header">
+                <h2>Seismic Forecast Probability</h2>
+                <p>Earthquake probability projections (3, 7, 14, 30 days)</p>
+            </div>
+
+            <div class="forecast-grid">
+                <div id="forecast-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">
+            <h3>SeismoAI Assistant</h3>
+            <button class="close-btn" onclick="toggleChatbot()">−</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot-message">
+                <p>Hello! I'm your Earthquake Safety Assistant. How can I help you today?</p>
+            </div>
+        </div>
+
+        <!-- Language Selection -->
+        <div class="chatbot-settings">
+            <label for="language-select">Language:</label>
+            <select id="language-select" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="ar">Arabic</option>
+                <option value="pt">Portuguese</option>
+                <option value="ru">Russian</option>
+                <option value="id">Indonesian</option>
+                <option value="hi">Hindi</option>
+                <option value="ta">Tamil</option>
+            </select>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chatbot-input-area">
+            <div class="quick-actions" id="quick-actions">
+                <button class="action-btn" onclick="startVoiceInput()" title="Voice Input">
+                    🎤 Voice
+                </button>
+                <button class="action-btn" onclick="shareLocation()" title="Share Location">
+                    📍 Location
+                </button>
+                <button class="action-btn" onclick="downloadReport()" title="Download Report">
+                    ⬇️ Download
+                </button>
+            </div>
+
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="chatbot-input" 
+                    placeholder="Ask about earthquakes, safety, or shelters..."
+                    onkeypress="handleChatInput(event)"
+                >
+                <button class="send-btn" onclick="sendChatMessage()">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Data Source: USGS Earthquake Hazards Program | Last Updated: <span id="last-update">--:--</span></p>
+            <p>&copy; 2024 SeismoAI - Advanced Earthquake Monitoring. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
